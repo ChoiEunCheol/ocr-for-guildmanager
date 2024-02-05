@@ -8,7 +8,7 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 
 # 이미지 파일 불러오기 및 크롭하기
 image = Image.open('./test_image1.jpg')
-cropped_image = image.crop((210, 150, 660, 560))
+cropped_image = image.crop((460, 150, 660, 565))
 
 # Pillow 이미지를 OpenCV 이미지로 변환
 cropped_image_np = np.array(cropped_image)
