@@ -7,8 +7,11 @@ import numpy as np
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # 이미지 파일 불러오기 및 크롭하기
-image = Image.open('./test_image1.jpg')
-cropped_image = image.crop((460, 150, 660, 565))
+image = Image.open('./test_image2.jpg')
+# cropped_image = image.crop((455, 150, 525, 565)) #주간점수
+cropped_image = image.crop((535, 150, 600, 565)) # 수로
+# cropped_image = image.crop((580, 150, 670, 565)) # 플래그
+
 
 # Pillow 이미지를 OpenCV 이미지로 변환
 cropped_image_np = np.array(cropped_image)
@@ -25,6 +28,6 @@ _, binary_image = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY + cv2.THRE
 # blur_image = cv2.GaussianBlur(binary_image, (5, 5), 0)
 
 # 이미지에서 텍스트 추출
-text = pytesseract.image_to_string(binary_image, lang='eng+kor')
+text = pytesseract.image_to_string(binary_image, lang='eng', config='--psm 6 --oem 3 outputbase digits --dpi 96 --user-patterns my_custom_patterns.txt')
 
 print(text)
