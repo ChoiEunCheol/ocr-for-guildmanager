@@ -8,7 +8,7 @@ sharp('./test_image1.jpg')
     saturation: 1.5,
   })
   .linear(2, -190) 
-  .toFile('sharp-image1.jpg', (err, info) => { 
+  .toFile('sharp_image1.jpg', (err, info) => { 
     if (err) throw err;
     console.log(info);
   });
