@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 입력 이미지 불러오기
-input_image = cv2.imread('cutting5.jpg', 0)  # 입력 이미지 경로
+input_image = cv2.imread('cutting3.jpg',0 )  # 입력 이미지 경로
 
 # 템플릿 이미지들의 리스트 생성
 templates = [cv2.imread(f'./template/template{i}.jpg', 0) for i in range(10)]
@@ -33,14 +33,23 @@ line_height = 15  # 숫자 간의 예상 높이를 설정합니다. 이 값은 �
 
 for match in matches:
     _, (x, y) = match
-    if y - last_y > line_height:  # 새로운 줄이 시작됨
+    if y - last_y > line_height or not current_line:  # 새로운 줄이 시작됨
         lines.append(current_line)
         current_line = []
     current_line.append(match)
     last_y = y
 lines.append(current_line)  # 마지막 줄 추가
 
-# 각 줄의 숫자를 x 좌표에 따라 정렬하고 출력
+# 줄의 시작을 감지하지 못하는 경우를 처리하기 위해 첫 번째 빈 줄을 제거
+if lines[0] == []:
+    lines = lines[1:]
+
+# 각 줄의 숫자를 x 좌표에 따라 정렬하고 배열로 출력
+number_lines = []
 for line in lines:
     line.sort(key=lambda x: x[1][0])  # x 좌표에 따라 정렬
-    print(''.join(str(num) for num, _ in line))
+    number_line = ''.join(str(num) for num, _ in line)
+    number_lines.append(number_line)
+
+# 결과 배열 출력
+print(number_lines)
