@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 입력 이미지 불러오기
-input_image = cv2.imread('cutting3.jpg', 0)  # 입력 이미지 경로
+input_image = cv2.imread('cutting5.jpg', 0)  # 입력 이미지 경로
 
 # 템플릿 이미지들의 리스트 생성
 templates = [cv2.imread(f'./template/template{i}.jpg', 0) for i in range(10)]
